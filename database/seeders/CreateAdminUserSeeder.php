@@ -19,7 +19,9 @@ class CreateAdminUserSeeder extends Seeder
         $user = ModelsUser::create([
             'name' => 'Rahul Shukla',
             'email' => 'admin@rscoder.com',
-            'password' => bcrypt('123456')
+            'password' => bcrypt('123456'),
+            'Status' => 'مفعل',
+            'role' => ['Super Admin'],
         ]);
         $role = Role::create(['name' => 'Super Admin']);
         $permissions = Permission::pluck('id', 'id')->all();

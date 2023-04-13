@@ -90,7 +90,7 @@
                     </ul>
                 </li>
 
-
+                @can('المستخدمين')
                 <li class="side-item side-item-category">المستخدمين</li>
                 <li class="slide">
                     <a class="side-menu__item" data-toggle="slide" href="{{ url('/' . ($page = '#')) }}"><svg
@@ -108,7 +108,7 @@
                             <li><a class="slide-item" href="{{ url('/' . ($page = 'roles')) }}">صلاحيات المستخدمين</a></li>
                     </ul>
                 </li>
-
+                @endcan
 
                 <li class="side-item side-item-category">الاعدادات</li>
                 <li class="slide">

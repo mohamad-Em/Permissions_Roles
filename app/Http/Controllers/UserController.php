@@ -34,7 +34,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name', 'name')->all();
-        return view('users.create', compact('roles'));
+        return view('users.Add_user', compact('roles'));
     }
     /**
      * Store a newly created resource in storage.
@@ -48,12 +48,13 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'role' => 'required',
+            'Status' => 'required'
         ]);
         $input = $request->all();
         $input['password'] = FacadesHash::make($input['password']);
         $user = ModelsUser::create($input);
-        $user->assignRole($request->input('roles'));
+        $user->assignRole($request->input('role'));
         return redirect()->route('users.index')
             ->with('success', 'User created successfully');
     }

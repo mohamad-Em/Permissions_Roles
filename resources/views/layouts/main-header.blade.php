@@ -202,12 +202,11 @@
                                 </div>
                                 <p class="dropdown-title-text subtext mb-0 text-white op-6 pb-0 tx-12 ">
                                 <h6 style="color: yellow" id="notifications_count">
-                                    {{ auth()->user()->unreadNotifications->count() }}
                                 </h6>
                                 </p>
                             </div>
                             <div id="unreadNotifications">
-                                @foreach (auth()->user()->unreadNotifications as $notification)
+                                {{--  @foreach (auth()->user()->unreadNotifications as $notification)
                                     <div class="main-notification-list Notification-scroll">
                                         <a class="d-flex p-3 border-bottom"
                                             href="{{ url('InvoicesDetails') }}/{{ $notification->data['id'] }}">
@@ -222,7 +221,7 @@
                                             </div>
                                         </a>
                                     </div>
-                                @endforeach
+                                @endforeach  --}}
 
                             </div>
                         </div>
