@@ -85,5 +85,4 @@ Route::get('unreadNotifications_count', 'InvoicesController@unreadNotifications_
 
 Route::get('unreadNotifications', 'InvoicesController@unreadNotifications')->name('unreadNotifications');
 
-
-Route::get('/{page}', 'AdminController@index');
+// Route::get('/{page}', AdminController::class,'index');

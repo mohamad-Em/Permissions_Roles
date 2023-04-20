@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UserExport;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Exc\storeRequest;
+use App\Imports\UserImport;
 use App\Models\User as ModelsUser;
 use App\User;
 use Spatie\Permission\Models\Role;
@@ -12,6 +15,8 @@ use Hash;
 use Illuminate\Foundation\Auth\User as AuthUser;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Hash as FacadesHash;
+use Maatwebsite\Excel\Excel as ExcelExcel;
+use Maatwebsite\Excel\Facades\Excel;
 
 class UserController extends Controller
 {
@@ -119,5 +124,19 @@ class UserController extends Controller
         ModelsUser::find($id)->delete();
         return redirect()->route('users.index')
             ->with('success', 'User deleted successfully');
+    }
+    public function export()
+    {
+        return view('excel');
+    }
+    public function import(storeRequest $request)
+    {
+        if ($request->file('file')) {
+            $delete = ModelsUser::getQuery()->delete();
+            if ($delete) {
+                Excel::import(new UserImport, $request->file('file')->store('temp'));
+                return back();
+            }
+        }
     }
 }
