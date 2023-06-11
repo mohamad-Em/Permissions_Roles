@@ -7,10 +7,11 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="{{ route('importExcel') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        <input type="file" name="file" >
-        <input type="submit" value="send">
-    </form>
+    {{-- <form action="{{ route('importExcel') }}" method="POST" enctype="multipart/form-data">
+    @csrf
+    <input type="file" name="file">
+    <input type="submit" value="send">
+    </form> --}}
+    <a href="{{ route('import') }}" class="btn btn-info">Excel</a>
 </body>
 </html>
