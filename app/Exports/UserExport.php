@@ -8,7 +8,7 @@ class UserExport implements FromArray
 {
     public function array(): array
     {
-        $list[] = ['الأسم', 'الوصف', 'مجوعة الأب'];
+        $list[] = ['name_ar', 'description_ar'];
 
         return $list;
     }

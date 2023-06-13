@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 class storeRequest extends FormRequest
 {
     public $file;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -23,7 +24,7 @@ class storeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file' => 'required|mimes:xlsx'
+            'file' => 'required',
         ];
     }
 }

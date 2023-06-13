@@ -66,13 +66,17 @@ Route::get('Print_invoice/{id}', 'InvoicesController@Print_invoice');
 
 Route::get('export_invoices', [UserController::class, 'export']);
 Route::get('import', [UserController::class, 'import'])->name('import');
+Route::get('import_invoices', [UserController::class, 'importImport']);
+Route::post('importSave', [UserController::class, 'importSave'])->name('importSave');
+Route::get('categorys/{code}', [UserController::class, 'categorys'])->name('categorys');
+
+// Route::get('import', [UserController::class, 'import'])->name('import');
 
 Route::group(['middleware' => ['auth']], function () {
 
-Route::resource('roles', RoleController::class);
+    Route::resource('roles', RoleController::class);
 
-Route::resource('users', UserController::class);
-
+    Route::resource('users', UserController::class);
 });
 
 Route::get('invoices_report', 'Invoices_Report@index');

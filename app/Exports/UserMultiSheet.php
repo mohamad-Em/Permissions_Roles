@@ -14,7 +14,8 @@ class UserMultiSheet implements WithMultipleSheets
         $sheets = [];
 
         for ($page = 1; $page <= 2; $page++) {
-            $sheets[] = new UserExport();
+            $sheets[0] = new UserExport();
+            $sheets[1] = new UserTwo();
         }
 
         return $sheets;

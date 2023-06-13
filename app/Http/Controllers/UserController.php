@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Exports\UserMultiSheet;
+use App\Http\Requests\Exc\storeRequest;
+use App\Imports\multisheet\Merge;
+use App\Imports\TwoTables;
+use App\Models\Product;
 use App\Models\User as ModelsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB as FacadesDB;
@@ -98,12 +102,12 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$id,
+            'email' => 'required|email|unique:users,email,' . $id,
             'password' => 'same:confirm-password',
             'roles' => 'required',
         ]);
         $input = $request->all();
-        if (! empty($input['password'])) {
+        if (!empty($input['password'])) {
             $input['password'] = FacadesHash::make($input['password']);
         }
         $user = ModelsUser::find($id);
@@ -136,7 +140,23 @@ class UserController extends Controller
 
     public function import()
     {
+        return Excel::download(new UserMultiSheet([2]), 'Menu.xlsx');
+    }
 
-        return Excel::download(new UserMultiSheet('test'), 'Menu.xlsx');
+    public function importImport()
+    {
+        return view('import');
+    }
+
+    public function importSave(storeRequest $request)
+    {
+        Excel::import(new Merge, $request->file('file'));
+
+        return redirect()->back()->with(['success' => 'Import Successfully']);
+    }
+    public function categorys($code)
+    {
+        $categorys = Product::whereHas('Category')->whereRelation('Category', 'code', $code)->count();
+        return view('users.categorys', compact('categorys'));
     }
 }
